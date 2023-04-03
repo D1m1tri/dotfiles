@@ -1,0 +1,29 @@
+Config { overrideRedirect = False
+    , font     = "Noto Sans Condensed Black 9, Noto Sans CJK JP 9"
+    , bgColor  = "#000000"
+    , fgColor  = "#ffffff"
+    , alpha    = 0
+    , position = TopW L 100
+    , commands = [ Run Weather "SBSP"
+      [ "--template", "<weather> <tempC>°C"
+        , "-L", "10"
+        , "-H", "30"
+        , "--low"   , "lightblue"
+        , "--normal", "#ffffff"
+        , "--high"  , "red"
+      ] 36000
+      , Run Cpu
+      [ "-L", "3"
+        , "-H", "50"
+        , "--high"  , "red"
+        , "--normal", "green"
+      ] 10
+      , Run Memory ["--template", "Mem: <usedratio>%"] 10
+      , Run Date "%d/%m/%Y <fc=#0088ee>%H:%M</fc>" "date" 10
+      , Run XMonadLog
+      , Run Com "/home/dimitri/.config/xmobar/statusbar.sh" [] "player" 10
+    ]
+    , sepChar  = "%"
+    , alignSep = "}{"
+    , template = "<action=`dmenu_run`><icon=/home/dimitri/.config/xmobar/haskell.xbm/></action> | %player% } %XMonadLog% { %cpu% | %memory% | %SBSP% | %date% "
+}
